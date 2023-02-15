@@ -1,0 +1,22 @@
+name: macOS release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build
+        run: cd Atif/src/cmake && make
+
+      - name: macOS
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ./Atif/src/cmake/AtifExe
