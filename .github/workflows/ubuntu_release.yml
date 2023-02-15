@@ -1,0 +1,23 @@
+name: Ubuntu Relase
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: make
+        run: cd Atif/src/cmake && make
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ubuntu
+          files: |
+            ./Atif/src/cmake/AtifExe

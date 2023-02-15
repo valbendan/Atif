@@ -1,10 +1,9 @@
-name: Windows
+name: Windows Release
 
 on:
   push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
+    tags:
+      - "v*.*.*"
 
 jobs:
   build:
@@ -25,7 +24,9 @@ jobs:
       - name: ls files
         run: cd D:\\a\\Atif\\Atif\\Atif\\build && ls
 
-      - uses: actions/upload-artifact@v3
+      - name: Release
+        uses: softprops/action-gh-release@v1
         with:
-          name: Windows
-          path: D:\\a\\Atif\\Atif\\Atif\\build\\Release\\AtifExe.exe
+          name: windows
+          files: |
+            D:\\a\\Atif\\Atif\\Atif\\build\\Release\\AtifExe.exe
